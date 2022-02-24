@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=64b42fd6-c757-4743-861d-deff097e45ac&lang=ru_RU"
+            type="text/javascript">
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+
+</head>
+
+<body>
+<div class="container">
+    <input id="adr1" type="text" value="Москва" placeholder="From">
+    <input id="adr2" type="text" value="Ульяновск" placeholder="To">
+
+    <div class="radio-box">
+        <div class="radio-box-item">
+            <input id="radio1" type="radio" name="radio" value="auto">
+            <label for="radio1">Машина</label>
+        </div>
+
+        <div class="radio-box-item">
+            <input id="radio2" type="radio" name="radio" value="masstransit">
+            <label for="radio2">Общественный транспорт</label>
+        </div>
+
+        <div class="radio-box-item">
+            <input id="radio3" type="radio" name="radio" value="pedestrian">
+            <label for="radio3">Пешком</label>
+        </div>
+    </div>
+
+    <button type="button" onclick="makeRoute()">Построить маршрут</button>
+    <button type="button" onclick="clearMap()">Очистить карту</button>
+</div>
+<div id="map" style="width: 80%; height: 80%; margin: 0 auto"></div>
+</body>
+</html>
