@@ -1,142 +1,90 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Быстрый старт. Размещение интерактивной карты на странице</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=64b42fd6-c757-4743-861d-deff097e45ac&lang=ru_RU"
-            type="text/javascript">
-    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!--    <link rel="stylesheet" href="style.css">-->
-    <script type="text/javascript" src="script.js"></script>
+    <title>Скоринг</title>
 
-    <style>
-        html {
-            height: 100%;
-        }
-
-        body {
-            /* Градиент */
-            background: #e8d5ff;
-            height: 100%;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            width: 40%;
-            margin: 0 auto 15px;
-        }
-
-        .radio-box {
-            display: flex;
-            justify-content: center;
-            margin: 0 auto 15px;
-        }
-
-        input {
-            border-radius: 5px;
-            margin-bottom: 5px;
-            height: 20px;
-        }
-
-        button {
-            border-radius: 5px;
-            margin-bottom: 5px;
-            height: 25px;
-            background-color: #8c2bc4;
-            color: white;
-            border-color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-<div class="container">
-    <input id="adr1" type="text" value="Москва" placeholder="From">
-    <input id="adr2" type="text" value="Ульяновск" placeholder="To">
 
-    <div class="radio-box">
-        <div class="radio-box-item">
-            <input id="radio1" type="radio" name="radio" value="auto">
-            <label for="radio1">Машина</label>
-        </div>
+    <form action="http://localhost:3000/scoring" method="POST">
 
-        <div class="radio-box-item">
-            <input id="radio2" type="radio" name="radio" value="masstransit">
-            <label for="radio2">Общественный транспорт</label>
-        </div>
+        <h1>Форма для заполнения</h1>
+        <p><i>Пожалуйста, заполните форму</i></p>
 
-        <div class="radio-box-item">
-            <input id="radio3" type="radio" name="radio" value="pedestrian">
-            <label for="radio3">Пешком</label>
-        </div>
-    </div>
+        <fieldset>
+            <legend>Контактная информация</legend>
 
-    <button type="button" onclick="makeRoute()">Построить маршрут</button>
-    <button type="button" onclick="clearMap()">Очистить карту</button>
-</div>
-<div id="map" style="width: 80%; height: 80%; margin: 0 auto"></div>
+            <label for="name">ФИО <em>*</em></label>
+            <input id="name" type="text" placeholder="Фамилия Имя Отчество" autofocus required>
 
-<script>
-    ymaps.ready(init);
+            <label for="phone">Номер телефона</label>
+            <input id="phone" type="text" placeholder="(ХХХ)ХХХ-ХХ-ХХ">
 
+            <label for="email">Электронная почта <em>*</em></label>
+            <input id="email" type="text" placeholder="yourmail@mail.ru" autofocus required>
+        </fieldset>
 
-    function init() {
-        myMap = new ymaps.Map("map", {
-            center: [55.76, 37.64],
-            zoom: 7,
-            controls: ['zoomControl', 'typeSelector', 'geolocationControl']
-        });
-    }
+        <fieldset>
+            <legend>Данные для проверки</legend>
 
+            <label for="gender">Пол</label>
+            <select name="gender" id="gender">
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select>
 
-    function makeRoute() { // Построение маршрута.
-        let pointFrom = document.getElementById('adr1').value;
-        let pointTo = document.getElementById('adr2').value;
+            <label for="birthDate">Дата рождения <em>*</em></label>
+            <input type="date" id="birthDate" name="birthDate" autofocus required>
 
-        let routingMode = ''
-        let radio = document.querySelectorAll('input[name="radio"]');
-        for (let i = 0; i < radio.length; i++) {
-            if (radio[i].checked) {
-                routingMode = radio[i].value;
-            }
-        }
+            <label for="periodLife">Срок проживания в регионе (лет) <em>*</em></label>
+            <input type="number" id="periodLife" name="periodLife" min="0" max="100" required>
 
-        // По умолчанию строится автомобильный маршрут.
-        if (pointFrom === '' || pointTo === '') {
-            alert('Заполните поля')
-        } else {
-            multiRoute = new ymaps.multiRouter.MultiRoute({
-                referencePoints: [pointFrom, pointTo],
-                params: {
-                    routingMode: routingMode,
-                    avoidTrafficJams: true
-                }
-            }, {
-                boundsAutoApply: true,  // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
-                routeActiveStrokeWidth: 10,
-                routeActiveStrokeStyle: 'solid',
-                routeActiveStrokeColor: '#21ff00'
-            });
+            <label for="profession">Дата рождения <em>*</em></label>
+            <select name="profession" id="profession">
+                <option value="driver">Водитель</option>
+                <option value="policeman">Полицейский</option>
+                <option value="pilot">Пилот</option>
+                <option value="manager">Менеджер</option>
+                <option value="judge">Судья</option>
+                <option value="developer">Разработчик</option>
+                <option value="teacher">Преподаватель</option>
+            </select>
 
-            // Добавление маршрута на карту.
-            myMap.geoObjects.add(multiRoute);
-            // multiRoute.model.events.add('requestSuccess', function(){
-            //     let activeRoute = multiRoute.getActiveRoute();
-            //     activeRoute.baloon.open();
-            //     activeRoute.properties.get('distance').text;
-            //     activeRoute.properties.get('duration').text;
-            // });
-        }
-    }
+            <label for="sphere">Сфера деятельности</label>
+            <select name="sphere" id="sphere">
+                <option value="public">Общественная</option>
+                <option value="other">Другая</option>
+            </select>
 
+            <label for="periodWork">Срок работы в организации (лет) <em>*</em></label>
+            <input type="number" id="periodWork" name="periodWork" min="0" max="50" required>
 
-    function clearMap() {
-        myMap.geoObjects.removeAll();
-        multiRoute && myMap.geoObjects.remove(multiRoute);
-    }
-</script>
+            <div class="checkbox-container">
+                <div class="checkbox-container-item">
+                    <label for="bankAccount">Наличие банковского счета</label>
+                    <input type="checkbox" id="bankAccount" name="bankAccount">
+                </div>
+
+                <div class="checkbox-container-item">
+                    <label for="immovable">Наличие недвижимости</label>
+                    <input type="checkbox" id="immovable" name="bankAccount">
+                </div>
+
+                <div class="checkbox-container-item">
+                    <label for="policy">Наличие страхового полиса</label>
+                    <input type="checkbox" id="policy" name="policy">
+                </div>
+            </div>
+        </fieldset>
+
+        <button type="submit">Отправить форму</button>
+    </form>
+
 </body>
 </html>
