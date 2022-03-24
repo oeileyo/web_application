@@ -1,0 +1,90 @@
+textarea:required:invalid, input:required:invalid {
+    background-color: #d6fcb7;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    /* Градиент */
+    background: #c6d8fc;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 40%;
+    margin: 0 auto 15px;
+}
+
+.radio-box {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 15px;
+}
+
+input {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 20px;
+}
+
+button {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    height: 25px;
+    background-color: white;
+    color: black;
+    border-color: black;
+}
+
+
+
+h1 {
+    margin: 0 auto 5px;
+    font-size: 24px;
+}
+
+p {
+    margin: 0 auto 5px;
+    font-size: 14px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 40%;
+    margin: 20px 30% 5px 30% ;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: #c3d8ff;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 0 auto 10px;
+    border-color: black;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.checkbox-container {
+
+}
+
+.checkbox-container-item {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    margin-bottom: 5px;
+}
+
+select, input {
+    margin-bottom: 5px;
+}

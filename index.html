@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Валюты</title>
+
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+
+    <div>
+
+        <h1>Выберите валюту</h1>
+        <label for="select">Выберите валюту</label>
+        <select id="select">
+            <option value=""></option>
+            <option value="USD">Доллара США (USD)</option>
+            <option value="EUR">Евро (EUR)</option>
+            <option value="CNY">Китайский юань (CNY)</option>
+        </select>
+
+        <button onclick="getExchangeRate()">Узнать актуальный курс</button>
+    </div>
+
+    <script>
+        const getExchangeRate = () => {
+            const value = document.getElementById("select").value
+            console.log(value)
+
+            fetch("http://localhost:3000/exchange/" + value)
+                .then((res) => {
+                    return res.json()
+                })
+                .then(r => console.log(r))
+                .catch()
+        }
+    </script>
+
+</body>
+</html>
