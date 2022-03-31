@@ -42,14 +42,14 @@ app.get('/exchange/:val', (req, res) => {
   };
   console.log(req.params.val);
 
-  // rp(options)
-  //     .then((parsedBody) => {
-  //       const value = parsedBody.Valute[req.params.val]
-  //       res.send(value)
-  //     })
-  //     .catch(function(err) {
-  //       res.send('eerrrrr')
-  //     })
+  rp(options)
+      .then((parsedBody) => {
+        const value = parsedBody.Valute[req.params.val]
+        res.send(value)
+      })
+      .catch(function(err) {
+        res.send('eerrrrr')
+      })
 
 
 });

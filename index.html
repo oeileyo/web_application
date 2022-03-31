@@ -24,6 +24,9 @@
         </select>
 
         <button onclick="getExchangeRate()">Узнать актуальный курс</button>
+        <hr>
+        <span>Курс: </span>
+        <span id="span"></span>
     </div>
 
     <script>
@@ -31,12 +34,21 @@
             const value = document.getElementById("select").value
             console.log(value)
 
-            fetch("http://localhost:3000/exchange/" + value)
-                .then((res) => {
-                    return res.json()
-                })
-                .then(r => console.log(r))
-                .catch()
+            if (value) {
+                fetch("http://localhost:3000/exchange/" + value)
+                    .then((res) => {
+                        return res.json()
+                    })
+                    .then(r => {
+                        document.getElementById('span').innerText = r.Value
+                    })
+                    .catch()
+            } else {
+                document.getElementById('span').innerText = ''
+            }
+
+
+
         }
     </script>
 
